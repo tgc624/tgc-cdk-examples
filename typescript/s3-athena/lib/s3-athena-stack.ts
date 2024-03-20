@@ -1,16 +1,17 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as cdk from "aws-cdk-lib";
+import * as s3 from "aws-cdk-lib/aws-s3";
+import { Construct } from "constructs";
+
+const BUCKET_NAME = "cdk-athena-sample-bucket";
 
 export class S3AthenaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'S3AthenaQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    // S3バケットを作成
+    const bucket = new s3.Bucket(this, "AthenaGlueBucket", {
+      bucketName: BUCKET_NAME,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+    });
   }
 }
